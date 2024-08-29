@@ -1,41 +1,15 @@
-import React, { useRef, useState } from 'react';
-import './App.css';
-import InputField from './components/InputField';
-import { Todo } from './model';
-import Button from './components/Button';
-import ListSection from './components/ListSection';
+import React from "react";
+import HomePage from "./pages/HomePage";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-const App: React.FC = () => {
-  const [todo, setTodo] = useState<string>('');
-  const [todoList, setTodoList] = useState<Todo[]>([]);
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  const handleListAdd = (e: React.FormEvent) =>{
-    e.preventDefault();
-
-    const constructedTodo = {
-      id : Date.now(),
-      todo: todo,
-      isDone: false
-    };
-    setTodoList([...todoList,constructedTodo])
-
-    setTodo("")
-
-    inputRef.current?.blur();
-    
-  }
-
+const Routing = () => {
   return (
-    <div className="App">
-      <form onSubmit={(e) => handleListAdd(e)}>
-        <InputField todo={todo} setTodo={setTodo} inputRef={inputRef}/>
-        <Button todoList={todoList} setTodo={setTodo} setTodoList={setTodoList} />
-      </form>
-
-      <ListSection todoList={todoList}/>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+      </Routes>
+    </BrowserRouter>
   );
-}
+};
 
-export default App;
+export default Routing;
