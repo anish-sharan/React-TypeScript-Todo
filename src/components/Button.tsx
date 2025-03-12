@@ -1,15 +1,27 @@
 import React from 'react'
-import { Todo } from '../model'
+import { Button as CustomButton } from '@mui/material';
+import Colors from '../assets/Colors';
 
 interface Props {
-    setTodo: React.Dispatch<React.SetStateAction<string>>,
-    todoList: Todo[],
-    setTodoList: React.Dispatch<React.SetStateAction<Todo[]>>
+    label: string;
+    color?: string;
+    containerStyle?: React.CSSProperties;
+    StartIcon?: React.ComponentType;
+    className: string;
+    // setTodo: React.Dispatch<React.SetStateAction<string>>,
+    // todoList: Todo[],
+    // setTodoList: React.Dispatch<React.SetStateAction<Todo[]>>
 }
 
-const Button: React.FC<Props> = ({ todoList, setTodoList, setTodo }: Props) => {
+const Button: React.FC<Props> = ({ label, color = Colors.button, containerStyle, StartIcon, className }: Props) => {
     return (
-        <div><button type='submit'>Add</button></div>
+        <CustomButton variant="contained"
+            style={{ backgroundColor: color, ...containerStyle }}
+            startIcon={StartIcon && < StartIcon />}
+            className={className}
+        >
+            {label}
+        </CustomButton>
     )
 }
 
